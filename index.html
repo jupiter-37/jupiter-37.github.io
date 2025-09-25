@@ -1,12 +1,73 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Hello from GitHub Pages</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <title>Rockets 🚀</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+    }
+    .light {
+      --bg: #fff;
+      --fg: #000;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 2rem;
+    }
+    .rockets {
+      font-size: 4rem;
+      letter-spacing: 1rem;
+    }
+    button {
+      border: 2px solid var(--fg);
+      background: transparent;
+      color: var(--fg);
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:focus-visible {
+      outline: 2px solid var(--fg);
+      outline-offset: 2px;
+    }
+  </style>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (saved === 'light' || (!saved && prefersLight)) {
+        document.documentElement.classList.add('light');
+      }
+    })();
+  </script>
 </head>
-<body style="font-family: system-ui; max-width: 720px; margin: 3rem auto; background-color: black; color: white;">
-  <h1>It works! 🚀</h1>
-  <p>This is my user site hosted at <strong>abc.github.io</strong>.</p>
+<body>
+  <div class="rockets">🚀🚀🚀🚀🚀</div>
+  <button id="toggle">Toggle</button>
+
+  <script>
+    const btn = document.getElementById('toggle');
+    const root = document.documentElement;
+    function isLight() { return root.classList.contains('light'); }
+    function applyTheme(next) {
+      root.classList.toggle('light', next === 'light');
+      localStorage.setItem('theme', next);
+    }
+    btn.addEventListener('click', () => {
+      applyTheme(isLight() ? 'dark' : 'light');
+    });
+  </script>
 </body>
 </html>
